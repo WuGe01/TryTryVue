@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <h3>基礎運用</h3>
+    <div class="myapp">
+        {{ message }}
+    </div>
+    <h3>if & for 使用</h3>
+    <div id="VueForIf">
+        <h4>水果列表</h4>
+        <h5 v-if="showVue">特價中</h5>
+        <ol>
+            <li v-for="Item in sellItems">
+                <!-- / v-for 子物件放在前面 / -->
+                {{ Item.itemName }} : {{ Item.price }} 元
+            </li>
+        </ol>
+    </div>
+    <h3>v-model 使用</h3>
+    <div id="VueModel">
+        <h4>您最喜歡吃的是： {{ message }} </h4>
+        <input type="text" v-model='message'>
+    </div>
+<script>
+    var myapp = new Vue({
+        el:'.myapp',
+        data:{
+            message:'Hollow Vue.js word'
+        }
+    });
+    var VueForIf = new Vue({
+        el:'#VueForIf',
+        data:{
+            showVue:true,
+            sellItems:[
+                {itemName:'蘋果',price:50},
+                {itemName:'芭樂',price:30},
+                {itemName:'香蕉',price:15},
+            ],
+        }
+    });
+    var VueModel = new Vue({
+        el:'#VueModel',
+        data:{
+            message:'巧克力'
+        }
+    });
+</script>
+</body>
+</html>
