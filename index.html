@@ -42,6 +42,18 @@
             <game-item v-for="item in allgames" v-bind:game="item"></game-item>
         </ol>
     </div>
+    <h3>過濾器filters 使用</h3>
+    <div id="VueFilters">
+        <div>{{ message }}</div>
+        <div>{{ message | tobig }}</div>
+        <div>{{ message | tobig | toaddworld }}</div>
+        <div>{{ num }}</div>
+        <div>{{ num | x10 }}</div>
+    </div>
+    <h3>計算 使用</h3>
+    <div id="VueCompute">
+        <div>任天堂價錢：{{ price }} 含稅價格為：{{ intotax }}</div>
+    </div>
 <script>
     var myapp = new Vue({
         el:'.myapp',
@@ -89,6 +101,35 @@
                 { name: '踩地雷' },
                 { name: '象棋' }
             ]
+        }
+    });
+    var VueFilters = new Vue({
+        el : '#VueFilters',
+        data : {
+            message : 'abc',
+            num : 10
+        },
+        filters: {
+            tobig : function (e) {
+                return e.toUpperCase();
+            },
+            toaddworld : function (e) {
+                return e + 'end';
+            },
+            x10 : function (e) {
+                return e * 10 ;
+            }
+        }
+    });
+    var VueCompute = new Vue({
+        el:"#VueCompute",
+        data:{
+            price : 1000
+        },
+        computed:{
+            intotax : function (e) {
+                return this.price * 1.05;
+            }
         }
     });
 </script>
