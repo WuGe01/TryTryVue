@@ -28,6 +28,20 @@
         <h4>您最喜歡吃的是： {{ message }} </h4>
         <input type="text" v-model='message'>
     </div>
+    <h3>點擊事件 使用</h3>
+    <div id="VueClick">
+        <div>你最愛的水果是： {{ message }}</div>
+        <button v-on:click="Vuecharge('蘋果')">蘋果</button>
+        <button v-on:click="Vuecharge('芭樂')">芭樂</button>
+        <button v-on:click="Vuecharge('西瓜')">西瓜</button>
+        <button @click="Vuecharge('荔枝')">荔枝</button>
+    </div>
+    <h3>組件 使用</h3>
+    <div id="VueComponent">
+        <ol>
+            <game-item v-for="item in allgames" v-bind:game="item"></game-item>
+        </ol>
+    </div>
 <script>
     var myapp = new Vue({
         el:'.myapp',
@@ -50,6 +64,31 @@
         el:'#VueModel',
         data:{
             message:'巧克力'
+        }
+    });
+    var VueClick = new Vue({
+        el:'#VueClick',
+        data:{
+            message:'香蕉'
+        },
+        methods: {
+            Vuecharge: function(e) {
+                this.message = e ;
+            }
+        }
+    });
+    Vue.component('game-item',{
+        props: ['game'],
+        template: '<li>{{ game.name }}</li>'
+    });
+    var VueComponent = new Vue({
+        el:'#VueComponent',
+        data:{
+            allgames:[
+                { name: '接龍' },
+                { name: '踩地雷' },
+                { name: '象棋' }
+            ]
         }
     });
 </script>
