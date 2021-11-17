@@ -54,6 +54,15 @@
     <div id="VueCompute">
         <div>任天堂價錢：{{ price }} 含稅價格為：{{ intotax }}</div>
     </div>
+    <h3>watch 使用</h3>
+    <div id="VueWatch">
+        <div>最是智慧手機價格為: {{ price }} ， 含稅價格為： {{ taxprice }} </div>
+        <button @click="chargePrice(1000)">價格+1000</button>
+        <div>
+            手動調整價格：
+            <input type="number" v-model.number='price'>
+        </div>
+    </div>
 <script>
     var myapp = new Vue({
         el:'.myapp',
@@ -132,6 +141,26 @@
             }
         }
     });
+    var VueWatch = new Vue({
+        el:'#VueWatch',
+        data: {
+            price:0,
+            taxprice:0
+        },
+        watch: {
+            price : function ( newVal , oldVal ) {
+                console.log( newVal , oldVal );
+                this.taxprice = Math.round(this.price*1.05);
+            }
+        },
+        methods: {
+           chargePrice:function (e) {
+               this.price += e ;
+           }
+        }
+
+    });
+    VueWatch.price=1000;
 </script>
 </body>
 </html>
